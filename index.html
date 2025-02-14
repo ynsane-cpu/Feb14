@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(120deg, #a1c4fd, #c2e9fb);
+            font-family: 'Great Vibes', cursive;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: appear 1s ease-out forwards;
+            animation-delay: 0.5s;
+            display: none; /* Hide all sections by default */
+        }
+        .container.active {
+            display: block; /* Show the active section */
+        }
+        h1 {
+            color: #fff;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            animation: pulse 1.2s infinite;
+            margin: 20px auto;
+            cursor: pointer;
+        }
+        .heart:before, .heart:after {
+            position: absolute;
+            content: "";
+            left: 50px;
+            top: 0;
+            width: 50px;
+            height: 80px;
+            background: #ff3f3f;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        .message {
+            color: #fff;
+            font-size: 1.5em;
+            margin: 30px 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: appear 1s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        .hearts {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .hearts span {
+            position: absolute;
+            color: #ff3f3f;
+            animation: float 8s linear infinite;
+            opacity: 0;
+        }
+        button {
+            background: #ff3f3f;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 20px;
+        }
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 63, 63, 0.5);
+        }
+        @keyframes pulse {
+            0% { transform: scale(0.9); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(0.9); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes appear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    <div class="container active" id="page1">
+        <div class="heart"></div>
+        <h1>Happy Valentine's Day, Dear❤️</h1>
+        <button onclick="showPage('page2')">Click Here</button>
+    </div>
+    <div class="container" id="page2">
+        <div class="heart"></div>
+        <p class="message">You make every moment magical.</p>
+        <button onclick="showPage('page3')">>></button>
+    </div>
+    <div class="container" id="page3">
+        <div class="heart"></div>
+        <p class="message">Thank you for being my everything.</p>
+        <button onclick="showPage('page4')">>></button>
+    </div>
+    <div class="container" id="page4">
+        <div class="heart"></div>
+        <p class="message">I love you more than words can say.</p>
+        <button onclick="showPage('page5')">>></button>
+    </div>
+    <div class="container" id="page5">
+        <div class="heart"></div>
+        <p class="message">I choose you. And I'll choose you over and over. Forever.</p>
+        <button onclick="showPage('page6')">Dedicate To You >>></button>
+    </div>
+    <div class="container" id="page6">
+        <div class="heart"></div>
+        <p class="message">Here's a special song just for you!</p>
+        <audio controls>
+            <source src="O Beliya.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script>
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 50; i++) {
+                const heart = document.createElement('span');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                heart.style.fontSize = Math.random() * 30 + 20 + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.container');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+        // Initial floating hearts
+        createHearts();
+        // Show the first page by default
+        showPage('page1');
+    </script>
+</body>
+</html>
